@@ -46,7 +46,9 @@ public class Solution {
             int eo=x%2;
             if(x>1){
                 for(int i=0;i<n/2;i++){
+                    System.out.println("ooo11"+" C[i] "+c[i]+"c[n-..] "+c[n-i-1]+" X"+x);
                     if((s.charAt(i)==s.charAt(n-i-1))&&(s.charAt(i)!='9')){
+                        System.out.println("ooolaala11");
                         c[n-i-1]='9';
                         c[i]='9';
                         x=x-2;
