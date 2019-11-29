@@ -9,7 +9,6 @@ import java.util.regex.*;
 public class Solution {
 
     static String highestValuePalindrome(String s, int n, int k) {
-        BigInteger b = new BigInteger(s);
         char[] c=s.toCharArray();
         int u=0;
         for(int i=0;i<n/2;i++){
@@ -23,12 +22,19 @@ public class Solution {
         if(k==u){
             for(int i=0;i<n/2;i++){
                 if(s.charAt(i)!=s.charAt(n-i-1)){
+                    System.out.println("ooolaala");
                     if(s.charAt(i)>s.charAt(n-i-1)){
+                         System.out.println("ooo");
                         c[n-i-1]=c[i];
                     }
                     else{
+                        System.out.println("Came here2"+" C[i] "+c[i]+"c[n-..] "+c[n-i-1]);
                         c[i]=c[n-i-1];
                     }
+                    k--;
+                }
+                if(k==0){
+                    break;
                 }
             }
             String s1=new String(c);
@@ -39,31 +45,27 @@ public class Solution {
             k=k-x;
             int eo=x%2;
             if(x>1){
-                for(int i=0;i<=n/2;i++){
+                for(int i=0;i<n/2;i++){
                     if((s.charAt(i)==s.charAt(n-i-1))&&(s.charAt(i)!='9')){
                         c[n-i-1]='9';
                         c[i]='9';
                         x=x-2;
-                        if(i==n/2+1){
-                            System.out.println("Came here");
-                            x++;
-                        }
                     }
                     if(x<=1)
                         break;
                 }
                 s=new String(c);
             }
-            if(x==1){
+            if(true){
                 for(int i=0;i<=n/2;i++){
-                    System.out.println("ooo");
+                    System.out.println("ooo"+" C[i] "+c[i]+"c[n-..] "+c[n-i-1]+" X"+x);
                     if((s.charAt(i)!=s.charAt(n-i-1))&&(s.charAt(i)!='9' && s.charAt(n-i-1)!='9')){
                         System.out.println("ooolaala");
                         c[n-i-1]='9';
                         c[i]='9';
                         x=x-1;
                     }
-                    if(i==n/2 && n%2==1 && x==1){
+                    if(i==n/2 && n%2==1){
                         System.out.println("Came here2");
                         x--;
                         c[i]='9';
