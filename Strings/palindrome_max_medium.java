@@ -9,6 +9,7 @@ import java.util.regex.*;
 public class Solution {
 
     static String highestValuePalindrome(String s, int n, int k) {
+        BigInteger b = new BigInteger(s);
         char[] c=s.toCharArray();
         int u=0;
         for(int i=0;i<n/2;i++){
@@ -22,19 +23,12 @@ public class Solution {
         if(k==u){
             for(int i=0;i<n/2;i++){
                 if(s.charAt(i)!=s.charAt(n-i-1)){
-                    System.out.println("ooolaala");
                     if(s.charAt(i)>s.charAt(n-i-1)){
-                         System.out.println("ooo");
                         c[n-i-1]=c[i];
                     }
                     else{
-                        System.out.println("Came here2"+" C[i] "+c[i]+"c[n-..] "+c[n-i-1]);
                         c[i]=c[n-i-1];
                     }
-                    k--;
-                }
-                if(k==0){
-                    break;
                 }
             }
             String s1=new String(c);
@@ -42,45 +36,45 @@ public class Solution {
         }
         if(k>u){
             int x=k-u;
-            k=k-x;
             int eo=x%2;
-            if(x>1){
+            k=u;
+            if(x>=1){
                 for(int i=0;i<n/2;i++){
-                    System.out.println("ooo11"+" C[i] "+c[i]+"c[n-..] "+c[n-i-1]+" X"+x);
-                    if((s.charAt(i)==s.charAt(n-i-1))&&(s.charAt(i)!='9')){
-                        System.out.println("ooolaala11");
-                        c[n-i-1]='9';
-                        c[i]='9';
-                        x=x-2;
+                    if((s.charAt(i)!='9')&&(s.charAt(n-i-1)!='9')){
+                        if(x>1){
+                            if(c[i]==c[n-i-1]){
+                                x=x-2;
+                            }
+                            else{
+                                x=x-1;
+                                k--;
+                            }
+                            c[n-i-1]='9';
+                            c[i]='9';
+                        }
+                        else if(x==1){
+                            if(c[i]!=c[n-i-1]){
+                                x=x-1;
+                                k--;
+                                c[n-i-1]='9';
+                                c[i]='9';
+                            }
+                        }
+                        
                     }
-                    if(x<=1)
+                    if(x<1)
                         break;
                 }
                 s=new String(c);
             }
-            if(true){
-                for(int i=0;i<=n/2;i++){
-                    System.out.println("ooo"+" C[i] "+c[i]+"c[n-..] "+c[n-i-1]+" X"+x);
-                    if((s.charAt(i)!=s.charAt(n-i-1))&&(s.charAt(i)!='9' && s.charAt(n-i-1)!='9')){
-                        System.out.println("ooolaala");
-                        c[n-i-1]='9';
-                        c[i]='9';
-                        x=x-1;
-                    }
-                    if(i==n/2 && n%2==1){
-                        System.out.println("Came here2");
-                        x--;
-                        c[i]='9';
-                    }
-                    if(x<1){
-                        System.out.println("oooend");
-                        break;
-                    }
+            if(x>=1){
+                if(n%2==1){
+                    c[n/2]='9';
                 }
                 s=new String(c);
             }
-            if(true){
-                for(int i=0;i<=n/2;i++){
+            if(k!=0){
+                for(int i=0;i<n/2;i++){
                     if(s.charAt(i)!=s.charAt(n-i-1)){
                         if(s.charAt(i)>s.charAt(n-i-1)){
                             c[n-i-1]=c[i];
@@ -89,11 +83,12 @@ public class Solution {
                             c[i]=c[n-i-1];
                         }
                         k--;
-                        if(k==0){
-                            break;
-                        }
+                        //if(k==0){
+                        //    break;
+                        //}
                     }
                 }
+                s=new String(c);
             }
         }
         String s1=new String(c);
